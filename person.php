@@ -1,10 +1,12 @@
 <?php
 
-$Connection=mysqli_connect('localhost','root','','Person');
+$Connection=new PDO("mysql:host=localhost;dbname=person","root","");
 
 $query="SELECT * FROM `PersonData`";
-$result=mysqli_query($Connection,$query);
-$Persons=mysqli_fetch_all($result,MYSQLI_ASSOC);
+$Statement=$Connection->prepare($query);
+$row = $Statement->execute();
+
+$Persons= $Statement->fetchAll(PDO::FETCH_ASSOC);
 // print_r($Persons);
 
 ?>

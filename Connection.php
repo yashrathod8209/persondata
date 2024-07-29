@@ -1,5 +1,6 @@
 <?php
 
-$Connection=mysqli_connect('localhost','root','','person');
+$Connection=new PDO("mysql:host=localhost;dbname=person","root","");
+
 
 ?>

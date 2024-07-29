@@ -1,13 +1,14 @@
 <?php
 
 $Id=$_GET['Id'];
-$Connection=mysqli_connect('localhost','root','','Person');
+$Connection=new PDO("mysql:host=localhost;dbname=person","root","");
 
-$query="SELECT * FROM `persondata` WHERE `Id`=$Id";
-$result=mysqli_query($Connection,$query);
-$Person=mysqli_fetch_assoc($result);
-
-print_r($Person);
+$query="SELECT * FROM `PersonData`WHERE `Id`=(?)";
+$params=[$Id];
+$Statement=$Connection->prepare($query);
+$row = $Statement->execute($params);
+$Person= $Statement->fetch(PDO::FETCH_ASSOC);
+// print_r($Person);
 ?>  
 
 <!DOCTYPE html>
